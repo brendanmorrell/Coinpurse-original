@@ -27,6 +27,7 @@ module.exports = {
   },
   devtool: 'cheap-module-eval-source-map',
   devServer: {
-    contentBase: path.join(__dirname, 'public')
+    contentBase: path.join(__dirname, 'public'),
+    historyApiFallback: true //set this up so each time the server sends 404 back, it fallsback to index.html which is where the react-router will actually be rendering and serving up content
   }
 };
