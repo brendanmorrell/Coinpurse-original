@@ -6,10 +6,10 @@ const path = require('path');
 
 
 module.exports = {
-  entry: './src/app.js',
+  entry: './playground/redux-101.js',
   output: {
     path: path.join(__dirname, 'public'),
-    filename: 'bundle.js'
+    filename: 'bundle.js',
   },
   module: {
     rules: [{
@@ -17,17 +17,17 @@ module.exports = {
       test: /\.js$/,
       exclude: /node_modules/,
     }, {
-      test:/\.s?css$/,
+      test: /\.s?css$/,
       use: [
         'style-loader',
         'css-loader',
-        'sass-loader'
-      ]
-    }]
+        'sass-loader',
+      ],
+    }],
   },
   devtool: 'cheap-module-eval-source-map',
   devServer: {
     contentBase: path.join(__dirname, 'public'),
-    historyApiFallback: true //set this up so each time the server sends 404 back, it fallsback to index.html which is where the react-router will actually be rendering and serving up content
-  }
+    historyApiFallback: true, //set this up so each time the server sends 404 back, it fallsback to index.html which is where the react-router will actually be rendering and serving up content
+  },
 };
