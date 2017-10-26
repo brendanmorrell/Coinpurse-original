@@ -16,16 +16,23 @@
         "args": "none"
       }
     ],
+    "arrow-parens": 0,
+    "space-infix-ops": 1,
     "no-console": "off",
+    "keyword-spacing": 1,
+    "object-curly-newline": 0,
+    "space-in-parens": 1,
+    "quotes": 0,
+    "arrow-body-style": 0,
+    "no-else-return": 1,
     "no-multi-spaces": 1,
     "function-paren-newline": 0,
     "semi": "warn",
     "comma-dangle": "warn",
     "key-spacing": "warn",
     "no-multiple-empty-lines": "off",
-    "react/prop-types": "off",
     "max-len": "off",
-    "spaced-comment": "off",
+    "spaced-comment": 1,
     "jsx-quotes": ["warn","prefer-double"],
     "no-trailing-spaces": "warn",
     "block-spacing": "warn",
@@ -33,10 +40,13 @@
     "indent": "warn",
     "eol-last": "warn",
     "object-curly-spacing": "warn",
+
     "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
+    "react/prop-types": "off",
     "react/jsx-boolean-value": 0,
     "react/jsx-indent": "warn",
     "react/jsx-tag-spacing": 1,
+
     "import/first": 1
   }
 }
