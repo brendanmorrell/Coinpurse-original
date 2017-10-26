@@ -26,7 +26,6 @@ const { id: water } = store.dispatch(addExpense({ description: 'Water bill', amo
 const { id: gas } = store.dispatch(addExpense({ description: 'Gas bill', amount: 1000, createdAt: 1000 })).expense;
 const { id: gas2 } = store.dispatch(addExpense({ description: 'Gas bill 2', amount: 109500, createdAt: 1 })).expense;
 
-
 const jsx = (
   <Provider store={store}>
     <AppRouter />

@@ -6,7 +6,6 @@ export const addExpense = (
     note = '',
     amount = 0,
     createdAt = 0,
-    key = Math.random(),
   } = {},
 ) => ({
   type: 'ADD_EXPENSE',
@@ -16,7 +15,6 @@ export const addExpense = (
     note,
     amount,
     createdAt,
-    key,
   },
 });
 

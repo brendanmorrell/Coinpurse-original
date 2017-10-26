@@ -47,6 +47,8 @@
     "react/jsx-indent": "warn",
     "react/jsx-tag-spacing": 1,
 
-    "import/first": 1
+    "import/first": 1,
+    "import/no-named-as-default": 0,
+    "import/no-named-as-default-member": 0
   }
 }
