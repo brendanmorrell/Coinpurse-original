@@ -4,15 +4,20 @@ import { SingleDatePicker } from 'react-dates';// this is an airbnb available mo
 import 'react-dates/lib/css/_datepicker.css'// the relevant styling provided by airbnb
 
 export default class ExpenseForm extends React.Component {
-  state = {
-    description: '',
-    note: '',
-    amount: '',
-    createdAt: moment(),
-    calendarFocused: false,
-    errorDescription: '',
-    errorAmount: '',
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      description: props.expense ? props.expense.description : '',
+      note: props.expense ? props.expense.note : '',
+      amount: props.expense ? (props.expense.amount / 100).toString() : '',
+      createdAt: props.expense ? moment(props.expense.createdAt) : moment(),
+      calendarFocused: false,
+      errorDescription: '',
+      errorAmount: '',
+      errorDate: '',
+      dateMessage: '',
+    };
+  }
   onDescriptionChange = (e) => {
     const description = e.target.value;
     this.setState(() => ({ description, errorDescription: '' }))
@@ -28,9 +33,11 @@ export default class ExpenseForm extends React.Component {
     }
   };
   onDateChange = (createdAt) => {// this function takes a moment input
-    if (createdAt) {
-      this.setState(() => ({ createdAt }))
+    this.setState(() => ({ createdAt, errorDate: '' }))
+    if(!moment(createdAt)._isValid) {
+      return this.setState(() => ({dateMessage: 'DD/MM/YYYY'}))
     }
+    this.setState(() => ({dateMessage: ''}))
   };
   onFocusChange = ({ focused }) => {// destructured somehow. not sure where '.focused' is getting pulled from. maybe the focused property in the <SingleDatePicker component?
     this.setState(() => ({ calendarFocused: focused }))
@@ -38,12 +45,15 @@ export default class ExpenseForm extends React.Component {
   onSubmit = (e) => {
     e.preventDefault();
 
-    if(!this.state.description || !this.state.amount) {
+    if(!this.state.description || !this.state.amount || !this.state.createdAt) {
       if(!this.state.description) {
         this.setState(() => ({errorDescription: 'Description Required'}));
       }
       if (!this.state.amount) {
         this.setState(() => ({errorAmount: 'Amount Required'}));
+      }
+      if (!this.state.createdAt) {
+        this.setState(() => ({errorDate: 'Dates must be formatted DD/MM/YYYY'}));
       }
       return;
     }
@@ -59,6 +69,7 @@ export default class ExpenseForm extends React.Component {
       <div>
         {this.state.errorDescription && <h4>{this.state.errorDescription}</h4>}
         {this.state.errorAmount && <h4>{this.state.errorAmount}</h4>}
+        {this.state.errorDate && <h4>{this.state.errorDate}</h4>}
         <form onSubmit={this.onSubmit}>
           <input
             type="text"
@@ -81,13 +92,13 @@ export default class ExpenseForm extends React.Component {
             // the below props are optional
             numberOfMonths={1}
             isOutsideRange={() => false}
-          />
+          />{this.state.dateMessage && <p>{this.state.dateMessage}</p>}
           <textarea
             placeholder="Add a note for your expense (optional)"
             value={this.state.note}
             onChange={this.onNoteChange}
           />
-          <button>Add Expense</button>
+          <button>{this.props.buttonContent ? this.props.buttonContent : 'Add Expense' }</button>
         </form>
       </div>
     );

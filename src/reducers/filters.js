@@ -1,14 +1,14 @@
 // REDUCERS
 // 1. Reducers are pure functions (doesn't use or change anything from outside the function scope)
 // 2. Never change state or action (you want to return a new state usually if that's what you end up trying to d0)
-
+import moment from 'moment';
 
 // Filters Reducer
 const filtersReducerDefaultState = {
   text: '',
   sortBy: 'date',
-  startDate: undefined,
-  endDate: undefined,
+  startDate: moment().startOf('month'),
+  endDate: moment().endOf('month'),
 };
 export default (state = filtersReducerDefaultState, action) => {
   switch (action.type) {

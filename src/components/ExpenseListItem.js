@@ -1,20 +1,24 @@
 import React from 'react';
-import { connect } from 'react-redux';
+import moment from 'moment';
+import { Link } from 'react-router-dom';
 
-import { removeExpense } from '../actions/expenses';
+export default ({ id, description, amount, createdAt }) => {
+  // Only show year if different from current year
+  let dateDisplay;
+  const currentYear = moment().format('YYYY');
+  const createdAtYear = moment(createdAt).format('YYYY');
+  if (currentYear === createdAtYear) {
+    dateDisplay = moment(createdAt).format('MMM Do');
+  } else {
+    dateDisplay = moment(createdAt).format('MMM Do, YYYY');
+  }
 
-const ExpenseListItem = ({ id, description, amount, createdAt, dispatch }) => (
-  <div>
-    <h3>{ description }</h3>
-    <p>{ amount } - { createdAt }</p>
-    <button
-      value={id}
-      onClick={(e) => {
-        dispatch(removeExpense(id));
-          console.log(e.target.value);
-      }}
-    >Remove
-    </button>
-  </div>
-);
-export default connect()(ExpenseListItem);
+  return (
+    <div>
+      <Link to={`/edit/${id}`}>
+        <h3>{ description }</h3>
+      </Link>
+      <p>{ amount } - { dateDisplay }</p>
+    </div>
+  );
+};

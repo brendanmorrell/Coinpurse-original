@@ -8,11 +8,12 @@ import 'normalize.css/normalize.css';
 import AppRouter from './routers/AppRouter';
 // REDUX
 import store from './store/configureStore';
-import { addExpense, removeExpense, editExpense } from './actions/expenses';
-import { setTextFilter, sortByDate, sortByAmount, setStartDate, setEndDate } from './actions/filters';
 import getVisibleExpenses from './selectors/expenses';
 // CSS
 import './styles/styles.scss';
+
+
+import { addExpense } from './actions/expenses';
 
 
 
@@ -22,9 +23,10 @@ store.subscribe(() => {
   console.log(visibleExpenses);
 });
 
-const { id: water } = store.dispatch(addExpense({ description: 'Water bill', amount: 4500, createdAt: 5 })).expense;
-const { id: gas } = store.dispatch(addExpense({ description: 'Gas bill', amount: 1000, createdAt: 1000 })).expense;
-const { id: gas2 } = store.dispatch(addExpense({ description: 'Gas bill 2', amount: 109500, createdAt: 1 })).expense;
+
+store.dispatch(addExpense({ description: 'water bill', amount: 7000 }));
+store.dispatch(addExpense({ description: 'gas bill', amount: 7000, createdAt: 9999999 }));
+
 
 const jsx = (
   <Provider store={store}>

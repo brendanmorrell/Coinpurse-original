@@ -17,6 +17,8 @@
       }
     ],
     "arrow-parens": 0,
+    "no-underscore-dangle": 0,
+    "prefer-const": 1,
     "space-infix-ops": 1,
     "no-console": "off",
     "keyword-spacing": 1,
@@ -46,6 +48,8 @@
     "react/jsx-boolean-value": 0,
     "react/jsx-indent": "warn",
     "react/jsx-tag-spacing": 1,
+
+    "jsx-a11y/anchor-is-valid": 0,
 
     "import/first": 1,
     "import/no-named-as-default": 0,
