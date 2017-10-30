@@ -3,11 +3,12 @@ import { connect } from 'react-redux';
 import { DateRangePicker } from 'react-dates';
 import  'react-dates/lib/css/_datepicker.css';
 
-import { setTextFilter, sortByDate, sortByAmount, setStartDate, setEndDate } from '../actions/filters';
+import { setTextFilter, sortByDate, sortByAmount, setStartDate, setEndDate, sortReverse } from '../actions/filters';
 
 class ExpenseListFilters extends React.Component {
   state = {
     calendarFocused: null,
+    sortReverse: false,
   };
   onDatesChange = ({ startDate, endDate }) => {// he says an object gets passed into this that he destructures. try this without destructuring to see if you understand
     this.props.dispatch(setStartDate(startDate));
@@ -39,6 +40,12 @@ class ExpenseListFilters extends React.Component {
           <option value="date">Date</option>
           <option value="amount">Amount</option>
         </select>
+        <input
+          type="checkbox"
+          onChange={() => {
+            this.props.dispatch((sortReverse()));
+          }}
+        />
         <DateRangePicker
           startDate={this.props.filters.startDate}
           endDate={this.props.filters.endDate}

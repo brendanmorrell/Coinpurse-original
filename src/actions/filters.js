@@ -16,6 +16,11 @@ export const sortByAmount = () => ({
   type: 'SORT_BY_AMOUNT',
 });
 
+// SORT_REVERSE
+export const sortReverse = () => ({
+  type: 'SORT_REVERSE',
+});
+
 
 // SET_START_DATE
 export const setStartDate = startDate => ({

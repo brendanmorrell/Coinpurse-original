@@ -9,6 +9,7 @@ const filtersReducerDefaultState = {
   sortBy: 'date',
   startDate: moment().startOf('month'),
   endDate: moment().endOf('month'),
+  sortReverse: false,
 };
 export default (state = filtersReducerDefaultState, action) => {
   switch (action.type) {
@@ -26,6 +27,11 @@ export default (state = filtersReducerDefaultState, action) => {
       return {
         ...state,
         sortBy: 'amount',
+      };
+    case 'SORT_REVERSE':
+      return {
+        ...state,
+        sortReverse: !state.sortReverse,
       };
     case 'SET_START_DATE':
       return {

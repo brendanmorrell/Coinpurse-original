@@ -2,15 +2,25 @@ import React from 'react';
 import moment from 'moment';
 import { Link } from 'react-router-dom';
 
-export default ({ id, description, amount, createdAt }) => {
+import { connect } from 'react-redux';
+
+const ExpenseListItem = ({ id, description, amount, createdAt, expenses }) => {
   // Only show year if different from current year
+  const displayHours = (expenses.filter((expense) => moment(expense.createdAt).format('D') === moment(createdAt).format('D')).length > 1);
   let dateDisplay;
-  const currentYear = moment().format('YYYY');
-  const createdAtYear = moment(createdAt).format('YYYY');
-  if (currentYear === createdAtYear) {
-    dateDisplay = moment(createdAt).format('MMM Do');
-  } else {
-    dateDisplay = moment(createdAt).format('MMM Do, YYYY');
+  const createdThisYear = moment(createdAt).isSame(moment(), 'year');
+  if (createdThisYear) {
+    if (displayHours) {
+      dateDisplay = moment(createdAt).format('MMM Do h:mm:ss a');
+    } else {
+      dateDisplay = moment(createdAt).format('MMM Do');
+    }
+  } else if (!createdThisYear) {
+    if (displayHours) {
+      dateDisplay = moment(createdAt).format('MMM Do, YYYY h:mm:ss a');
+    } else {
+      dateDisplay = moment(createdAt).format('MMM Do, YYYY');
+    }
   }
 
   return (
@@ -22,3 +32,9 @@ export default ({ id, description, amount, createdAt }) => {
     </div>
   );
 };
+const mapStateToProps = (state) => {
+  return {
+    expenses: state.expenses,
+  };
+};
+export default connect(mapStateToProps)(ExpenseListItem);

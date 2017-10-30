@@ -9,6 +9,7 @@ import AppRouter from './routers/AppRouter';
 // REDUX
 import store from './store/configureStore';
 import getVisibleExpenses from './selectors/expenses';
+import { sortReverse } from './actions/filters';
 // CSS
 import './styles/styles.scss';
 
@@ -22,6 +23,11 @@ store.subscribe(() => {
   const visibleExpenses = getVisibleExpenses(state.expenses, state.filters);
   console.log(visibleExpenses);
 });
+
+store.dispatch(sortReverse());
+store.dispatch(sortReverse());
+store.dispatch(sortReverse());
+store.dispatch(sortReverse());
 
 
 store.dispatch(addExpense({ description: 'water bill', amount: 7000 }));
