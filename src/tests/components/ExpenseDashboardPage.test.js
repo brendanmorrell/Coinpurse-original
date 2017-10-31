@@ -13,4 +13,3 @@ test('should render the ExpenseListFilters and ExpenseList components', () => {
   const wrapper = shallow(<ExpenseDashboardPage />);
   expect(wrapper).toMatchSnapshot();
 });
-a
