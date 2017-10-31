@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 
 import { connect } from 'react-redux';
 
-const ExpenseListItem = ({ id, description, amount, createdAt, expenses }) => {
+export const ExpenseListItem = ({ id, description, amount, createdAt, expenses }) => {
   // Only show year if different from current year
   const displayHours = (expenses.filter((expense) => moment(expense.createdAt).format('D') === moment(createdAt).format('D')).length > 1);
   let dateDisplay;

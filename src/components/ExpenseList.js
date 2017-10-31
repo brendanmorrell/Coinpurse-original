@@ -3,13 +3,18 @@ import { connect } from 'react-redux';
 
 import ExpenseListItem from './ExpenseListItem';
 import selectExpenses from '../selectors/expenses';
-
-const ExpenseList = (props) => (
+// adding 'export' is so you can grap the non-connected component for testing. the default export is the one you actually use for the app, and it is connected to the state via redux
+export const ExpenseList = (props) => (
   <div>
-    <h1>Expense List </h1>
-    { props.expenses.map((expense) => {
-      return <ExpenseListItem key={expense.id} {...expense} />;
-    })}
+    {
+      props.expenses.length === 0 ? (
+        <p>No Expenses currently</p>
+      ) : (
+        props.expenses.map((expense) => {
+          return <ExpenseListItem key={expense.id} {...expense} />;
+        })
+      )
+    }
   </div>
 );
 
