@@ -13,7 +13,7 @@ exports[`It should render the 'Rent' expense item which is the 2nd item in the e
   <p>
     109500
      - 
-    Dec 29th, 1969
+    Dec 29th
   </p>
 </div>
 `;

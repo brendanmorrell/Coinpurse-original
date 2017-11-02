@@ -5,17 +5,30 @@ import  'react-dates/lib/css/_datepicker.css';
 
 import { setTextFilter, sortByDate, sortByAmount, setStartDate, setEndDate, sortReverse } from '../actions/filters';
 
-class ExpenseListFilters extends React.Component {
+export class ExpenseListFilters extends React.Component {
   state = {
     calendarFocused: null,
     sortReverse: false,
   };
   onDatesChange = ({ startDate, endDate }) => {// he says an object gets passed into this that he destructures. try this without destructuring to see if you understand
-    this.props.dispatch(setStartDate(startDate));
-    this.props.dispatch(setEndDate(endDate));
+    this.props.setStartDate(startDate);
+    this.props.setEndDate(endDate);
   };
   onFocusChange = (calendarFocused) => {
     this.setState(() => ({ calendarFocused }));
+  };
+
+  onSetTextFilter = (e) => {
+    this.props.setTextFilter(e.target.value);
+  };
+  onSortTypeChange = (e) => {
+    if (e.target.value === 'date') {
+      return this.props.sortByDate();
+    }
+    return this.props.sortByAmount();
+  };
+  onSortReverse = () => {
+    this.props.sortReverse();
   };
   render() {
     return (
@@ -24,27 +37,18 @@ class ExpenseListFilters extends React.Component {
           type="text"
           placeholder="Search expenses..."
           value={this.props.filters.text}
-          onChange={(e) => {
-            this.props.dispatch(setTextFilter(e.target.value));
-          }}
+          onChange={this.onSetTextFilter}
         />
         <select
           value={this.props.filters.sortBy}
-          onChange={(e) => {
-            if (e.target.value === 'date') {
-              return this.props.dispatch(sortByDate());
-            }
-            return this.props.dispatch(sortByAmount());
-          }}
+          onChange={this.onSortTypeChange}
         >
           <option value="date">Date</option>
           <option value="amount">Amount</option>
         </select>
         <input
           type="checkbox"
-          onChange={() => {
-            this.props.dispatch((sortReverse()));
-          }}
+          onChange={this.onSortReverse}
         />
         <DateRangePicker
           startDate={this.props.filters.startDate}
@@ -61,10 +65,18 @@ class ExpenseListFilters extends React.Component {
   }
 };
 
-const mapStateToProps = (state) => {
-  return {
-    filters: state.filters,
-  };
-};
+const mapStateToProps = (state) => ({
+  filters: state.filters
+});
 
-export default connect(mapStateToProps)(ExpenseListFilters);
+const mapDispatchToProps = (dispatch) => ({
+    setStartDate: (startDate) => dispatch(setStartDate(setStartDate)),
+    setEndDate: (endDate) => dispatch(setEndDate(endDate)),
+    onSetTextFilter: (text) => dispatch(setTextFilter(text)),
+    sortByDate: () => dispatch(sortByDate()),
+    sortByAmount: () => dispatch(sortByAmount()),
+    sortReverse: () => dispatch(sortReverse()),
+});
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(ExpenseListFilters);

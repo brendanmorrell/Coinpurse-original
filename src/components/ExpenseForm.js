@@ -1,7 +1,6 @@
 import React from 'react';
 import moment from 'moment';
 import { SingleDatePicker } from 'react-dates';// this is an airbnb available module that gives a calendar. other versions also available
-import 'react-dates/lib/css/_datepicker.css'// the relevant styling provided by airbnb
 
 export default class ExpenseForm extends React.Component {
   constructor(props) {
@@ -39,7 +38,7 @@ export default class ExpenseForm extends React.Component {
     }
     this.setState(() => ({dateMessage: ''}))
   };
-  onFocusChange = ({ focused }) => {// destructured somehow. not sure where '.focused' is getting pulled from. maybe the focused property in the <SingleDatePicker component?
+  onFocusChange = ({ focused}) => {// destructured somehow. not sure where '.focused' is getting pulled from. maybe the focused property in the <SingleDatePicker component?
     this.setState(() => ({ calendarFocused: focused }))
   };
   onSubmit = (e) => {

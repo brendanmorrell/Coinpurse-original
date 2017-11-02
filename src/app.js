@@ -12,6 +12,7 @@ import getVisibleExpenses from './selectors/expenses';
 import { sortReverse } from './actions/filters';
 // CSS
 import './styles/styles.scss';
+import 'react-dates/lib/css/_datepicker.css'// the relevant styling provided by airbnb
 
 
 import { addExpense } from './actions/expenses';
