@@ -22,6 +22,7 @@ import { addExpense } from './actions/expenses';
 
 const state = store.getState();
 
+
 const jsx = (
   <Provider store={store}>
     <AppRouter />
