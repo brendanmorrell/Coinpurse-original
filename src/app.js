@@ -19,21 +19,8 @@ import { addExpense } from './actions/expenses';
 
 
 
-store.subscribe(() => {
-  const state = store.getState();
-  const visibleExpenses = getVisibleExpenses(state.expenses, state.filters);
-  console.log(visibleExpenses);
-});
 
-store.dispatch(sortReverse());
-store.dispatch(sortReverse());
-store.dispatch(sortReverse());
-store.dispatch(sortReverse());
-
-
-store.dispatch(addExpense({ description: 'water bill', amount: 7000 }));
-store.dispatch(addExpense({ description: 'gas bill', amount: 7000, createdAt: 9999999 }));
-
+const state = store.getState();
 
 const jsx = (
   <Provider store={store}>
