@@ -12,7 +12,7 @@ module.exports = (env) => { // we configured what value env is in package.json f
   return {
     entry: './src/app.js',
     output: {
-      path: path.join(__dirname, 'public'),
+      path: path.join(__dirname, 'public', 'dist'),
       filename: 'bundle.js',
     },
     module: {
@@ -25,9 +25,9 @@ module.exports = (env) => { // we configured what value env is in package.json f
         use: CSSExtract.extract({// this is where we define how the extraction (CSS out of the bundle into the file we defined above) will actually work
           use: [
             {
-              loader: 'css-loader',// css and sass loader tell webpack to still process css, we will just be extracting it after
+              loader: 'css-loader', // css and sass loader tell webpack to still process css, we will just be extracting it after
               options: {
-                sourceMap: true,// configures the css loaders to use that inline-source-map devTool that shows where the css is locatied in line in the actual css files, as opposed to lik line 24897 in the bundle.js file
+                sourceMap: true, // configures the css loaders to use that inline-source-map devTool that shows where the css is locatied in line in the actual css files, as opposed to lik line 24897 in the bundle.js file
               },
             },
             {
@@ -47,6 +47,7 @@ module.exports = (env) => { // we configured what value env is in package.json f
     devServer: {
       contentBase: path.join(__dirname, 'public'),
       historyApiFallback: true, // set this up so each time the server sends 404 back, it fallsback to index.html which is where the react-router will actually be rendering and serving up content
+      publicPath: '/dist/',
     },
   };
 };
