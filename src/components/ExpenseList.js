@@ -4,6 +4,9 @@ import { connect } from 'react-redux';
 import ExpenseListItem from './ExpenseListItem';
 import selectExpenses from '../selectors/expenses';
 // adding 'export' is so you can grap the non-connected component for testing. the default export is the one you actually use for the app, and it is connected to the state via redux
+
+
+
 export const ExpenseList = (props) => (
   <div>
     {

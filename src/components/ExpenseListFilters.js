@@ -18,7 +18,7 @@ export class ExpenseListFilters extends React.Component {
     this.setState(() => ({ calendarFocused }));
   };
 
-  onSetTextFilter = (e) => {
+  setTextFilter = (e) => {
     this.props.setTextFilter(e.target.value);
   };
   onSortTypeChange = (e) => {
@@ -37,7 +37,7 @@ export class ExpenseListFilters extends React.Component {
           type="text"
           placeholder="Search expenses..."
           value={this.props.filters.text}
-          onChange={this.onSetTextFilter}
+          onChange={this.setTextFilter}
         />
         <select
           value={this.props.filters.sortBy}
@@ -70,9 +70,9 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-    setStartDate: (startDate) => dispatch(setStartDate(setStartDate)),
+    setStartDate: (startDate) => dispatch(setStartDate(startDate)),
     setEndDate: (endDate) => dispatch(setEndDate(endDate)),
-    onSetTextFilter: (text) => dispatch(setTextFilter(text)),
+    setTextFilter: (text) => dispatch(setTextFilter(text)),
     sortByDate: () => dispatch(sortByDate()),
     sortByAmount: () => dispatch(sortByAmount()),
     sortReverse: () => dispatch(sortReverse()),
