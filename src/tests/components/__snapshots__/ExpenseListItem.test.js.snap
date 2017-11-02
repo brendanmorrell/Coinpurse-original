@@ -11,9 +11,9 @@ exports[`It should render the 'Rent' expense item which is the 2nd item in the e
     </h3>
   </Link>
   <p>
-    109500
-     - 
-    Dec 29th
+    $1,095.00
+    -
+    December 29th
   </p>
 </div>
 `;

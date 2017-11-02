@@ -1,25 +1,28 @@
 import React from 'react';
-import moment from 'moment';
 import { Link } from 'react-router-dom';
+import moment from 'moment';
+import numeral from 'numeral';
 
 import { connect } from 'react-redux';
 
 export const ExpenseListItem = ({ id, description, amount, createdAt, expenses }) => {
+  const formattedAmount = numeral(amount / 100).format('$0, 0.00');
+
   // Only show year if different from current year
   const displayHours = (expenses.filter((expense) => moment(expense.createdAt).format('D') === moment(createdAt).format('D')).length > 1);
   let dateDisplay;
   const createdThisYear = moment(createdAt).isSame(moment(), 'year');
   if (createdThisYear) {
     if (displayHours) {
-      dateDisplay = moment(createdAt).format('MMM Do h:mm:ss a');
+      dateDisplay = moment(createdAt).format('MMM Do h:mm a');
     } else {
-      dateDisplay = moment(createdAt).format('MMM Do');
+      dateDisplay = moment(createdAt).format('MMMM Do');
     }
   } else if (!createdThisYear) {
     if (displayHours) {
-      dateDisplay = moment(createdAt).format('MMM Do, YYYY h:mm:ss a');
+      dateDisplay = moment(createdAt).format('MMM Do, YYYY h:mm a');
     } else {
-      dateDisplay = moment(createdAt).format('MMM Do, YYYY');
+      dateDisplay = moment(createdAt).format('MMMM Do, YYYY');
     }
   }
 
@@ -28,7 +31,11 @@ export const ExpenseListItem = ({ id, description, amount, createdAt, expenses }
       <Link to={`/edit/${id}`}>
         <h3>{ description }</h3>
       </Link>
-      <p>{ amount } - { dateDisplay }</p>
+      <p>
+        { formattedAmount }
+        -
+        { dateDisplay }
+      </p>
     </div>
   );
 };
