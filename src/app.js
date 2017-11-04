@@ -3,6 +3,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';// sets what you want react to use as the redux store
 import 'normalize.css/normalize.css';
+import './firebase/firebase';
 
 // REACT ROUTER
 import AppRouter from './routers/AppRouter';
